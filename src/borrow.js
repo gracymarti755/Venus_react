@@ -61,7 +61,7 @@ setId2(tid3[1]/1000000000000000000)
     var am = tid1 * 100000000;
    
     var amount = am + "0000000000";
-    if((tid4/100000000000000000000)>=amount){
+    if((tid4/1000000000000000000)>=amount){
  console.log(amount)
  await Supply.methods.repayBorrow(amount).send({from:accounts[0]});
   alert("Borrowed")
