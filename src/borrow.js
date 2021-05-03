@@ -23,6 +23,7 @@ function Borrow() {
      const[tid3,setId3] = useState([]);
      const[tid2,setId2] = useState([]);
      const[tid4,setId4] = useState([]);
+     const[tid5,setId5] = useState([]);
     // var [tid2,setId2] = useState([]);
   
     // // var [tid3,setId3] = useState([]);
@@ -34,6 +35,7 @@ function Borrow() {
 setId2(tid3[1]/1000000000000000000)
      console.log("value",tid3[1])
      setId4(await Supply.methods.borrowBalanceStored(accounts[0]).call() );
+setId5(tid4/1000000000000000000)
      console.log("borrow value",tid4)
 
     
@@ -61,7 +63,7 @@ setId2(tid3[1]/1000000000000000000)
     var am = tid1 * 100000000;
    
     var amount = am + "0000000000";
-    if((tid4/1000000000000000000)>=amount){
+    if(amount<=tid5){
  console.log(amount)
  await Supply.methods.repayBorrow(amount).send({from:accounts[0]});
   alert("Borrowed")
