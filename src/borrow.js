@@ -43,10 +43,11 @@ setId2(tid3[1]/1000000000000000000)
    const borrow = async(event) =>{
     event.preventDefault();
     const accounts = await  web3.eth.getAccounts();
-    if(tid<=tid2)
- {
+    
     var am = tid * 100000000;
     var amount = am + "0000000000";
+    if(amount<=tid2)
+ {
   console.log(amount)
  await Supply.methods.borrow(amount).send({from:accounts[0]});
   alert("Borrowed")
@@ -56,10 +57,11 @@ setId2(tid3[1]/1000000000000000000)
    const repayborrow = async(event) =>{
     event.preventDefault();
     const accounts = await  web3.eth.getAccounts();
-    if((tid4/100000000000000000000)<=tid1){
+   
     var am = tid1 * 100000000;
    
     var amount = am + "0000000000";
+    if((tid4/100000000000000000000)>=amount){
  console.log(amount)
  await Supply.methods.repayBorrow(amount).send({from:accounts[0]});
   alert("Borrowed")
