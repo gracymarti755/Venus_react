@@ -259,7 +259,7 @@ const exitcollateral = async (event) => {
     <button class="btn btn-primary" onClick = {approve}>Approve</button>
         <br/>
           <Popup trigger={<button class="btn btn-primary"> Mint</button>} position="right center">
-    <div>Enter the amount you want to  mint</div>
+    <div class="text-white bg-dark">Enter the amount you want to  mint</div>
     <input type = "number" name="tid" required onChange={event => setId( event.target.value)} />
     <button class="btn btn-primary" onClick={mint}>Confirm</button>
 
@@ -285,7 +285,7 @@ const exitcollateral = async (event) => {
     </div>    
     <br/>
           <Popup trigger={<button class="btn btn-primary"> Redeem</button>} position="right center">
-    <div>Enter the amount you want to Redeem</div>
+    <div class="text-white bg-dark">Enter the amount you want to Redeem</div>
     <input type = "number" name="tid1" required onChange={event => setId1( event.target.value)} />
     <button class="btn btn-primary" onClick={redeem}>Confirm</button>
     </Popup>

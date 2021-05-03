@@ -4,6 +4,7 @@ import history from "./utils/history";
 import {Card,Button,Container} from 'react-bootstrap';
 import Supply from "./Supply";
 import './App.css';
+import Borrow from "./borrow";
 
 
 function App() {
@@ -37,6 +38,17 @@ function App() {
               >
                 Supply Concept    
               </Button>{' '}
+              <br></br>
+              <br />
+              <Button variant="primary"
+                className="btn"
+                onClick={() => {
+                  history.push("/Borrow");
+                }}
+              >
+                Borrow Concept    
+              </Button>{' '}
+
 
 
 
@@ -46,6 +58,9 @@ function App() {
             
             <Route path="/Supply">
               <Supply />
+            </Route>
+            <Route path="/Borrow">
+              <Borrow />
             </Route>
           </Switch>
         </Router>
