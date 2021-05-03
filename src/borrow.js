@@ -61,7 +61,7 @@ setId2(tid3[1]/1000000000000000000)
    
     var amount = am + "0000000000";
  console.log(amount)
- await Supply.methods.repayborrow(amount).send({from:accounts[0]});
+ await Supply.methods.repayBorrow(amount).send({from:accounts[0]});
   alert("Borrowed")
     }
     else alert("Your entered amount should be less then the available borrow balance ")
