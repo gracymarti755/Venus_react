@@ -48,7 +48,7 @@ setId5(tid4/1000000000000000000)
     
     var am = tid * 100000000;
     var amount = am + "0000000000";
-    if(amount<=tid2)
+    if(tid<=tid2)
  {
   console.log(amount)
  await Supply.methods.borrow(amount).send({from:accounts[0]});
@@ -63,7 +63,8 @@ setId5(tid4/1000000000000000000)
     var am = tid1 * 100000000;
    
     var amount = am + "0000000000";
-    if(amount<=tid5)
+  
+    if(tid1<=tid5)
     {
  console.log(amount)
  await Supply.methods.repayBorrow(amount).send({from:accounts[0]});
@@ -140,7 +141,7 @@ Available Borrow Limit {tid2}
       <br /><br />
       <Popup trigger={<button class="btn btn-primary">  Repay Borrow</button>} position="right center"><br />
     <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
-    <input type = "number"  name="tid1" required onChange={event => setId( event.target.value)} />
+    <input type = "number"  name="tid1" required onChange={event => setId1( event.target.value)} />
     <button class="btn btn-primary" onClick={repayborrow}>Confirm</button>
     </Popup>
        
