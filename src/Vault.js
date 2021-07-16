@@ -184,9 +184,9 @@ var[ap1,setAP] = useState("");
 (
 (
 <div>
-<h1>Before Deposit we want to approve first</h1>
+<h4 style={{marginLeft:"400px"}}>Before Deposit we want to approve first</h4>
 <br />
-<button class="btn btn-primary" onClick={approve}>Approve</button>
+<button class="btn btn-primary" style={{marginLeft:"400px"}} onClick={approve}>Approve</button>
 </div>
 )
 ):
@@ -267,11 +267,13 @@ var[ap1,setAP] = useState("");
     </Popup>
     <br></br>
   <br></br> <br></br>
-  <br></br>
+  <br></br><br></br> <br></br>
+  <br></br> <br></br>
+  
   
 
   <h3>Deposits</h3>
-  <br></br><br></br>
+  <br></br>
   <text>Your wallet Balance :  &nbsp;{parseFloat(balance/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text><br></br>  
   <br></br>
   <text>Total deposited Balance  :   &nbsp;{ parseFloat(totaldep/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text> <br></br>
