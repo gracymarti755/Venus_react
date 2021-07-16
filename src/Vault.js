@@ -4,6 +4,7 @@ import history from "./utils/history";
 import App from "./App";
 import Alchemist from "./Alchemistabi";
 import basetoken from "./borrow";
+import synth from "./syntheticabi";
 import Popup from 'reactjs-popup';
 
 //import {useState} from 'react';
@@ -23,9 +24,13 @@ function Vault() {
      const[avalwithdraw,setAvalwithdraw] = useState("");
      const[avaltoborrow,setAvalborrow] = useState("");
      const[balance,setbalance] = useState("");
+var[balan,setbalan] = useState("");
+var[app1,setApp] = useState("");
+var[ap1,setAP] = useState("");
+
     // var [tid2,setId2] = useState([]);
   
-    // // var [tid3,setId3] = useState([]);
+    var [tid5,setId5] = useState([]);
     // let r = [];
    const bal = async () => {
  
@@ -35,10 +40,26 @@ function Vault() {
       var totaldebited = await Alchemist.methods.getCdpTotalDebt(accounts[0]).call();
       setTotaldebt(totaldebited);
       setAvalwithdraw(totaldep - totaldebt);
-      
-      setAvalborrow(((totaldep * 50)/100) - totaldebt);
+      var av = (totaldep * 50)/100;
+      var bb = av - totaldebt;
+      setAvalborrow(bb);
       setbalance(await basetoken.methods.balanceOf(accounts[0]).call());
-    
+      setbalan(await synth.methods.balanceOf(accounts[0]).call());
+      // let a = await basetoken.methods.allowance(accounts[0],0xe131C705e5e1405e0FF627b5782bcC3664Cd8506).call();
+      // alert(a);
+      // if(a>0){
+      //   setApp(true);
+      // }
+      // else{
+      //   setApp(false);
+      // }
+      // let b=await synth.methods.allowance(accounts[0],0xe131C705e5e1405e0FF627b5782bcC3664Cd8506).call();
+      // if(a>0){
+      //   setAP(true);
+      // }
+      // else{
+      //   setAP(false);
+      // }
    }
   //  alert(tid3[1]);
    useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw])
@@ -81,6 +102,16 @@ function Vault() {
     alert("Borrow amount is repayed")
     bal()
   }
+  const repayborro = async(event) => {
+    event.preventDefault();
+    const accounts =  await web3.eth.getAccounts();
+   
+    var val = tid5 * 1000000000;
+    var value = val + "000000000"
+    await Alchemist.methods.repay(value,0).send({from:accounts[0]});
+    alert("Borrow amount is repayed")
+    bal()
+  }
   const liquidate = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
@@ -91,8 +122,16 @@ function Vault() {
     alert("liquidate succesfully")
     bal()
   }
-        
-   
+  // const approve = async() => {
+  //   let account = await web3.eth.getAccounts();
+  //   let amount = 1000000000; 
+  //   await basetoken.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+  // }
+  // const approv = async() => {
+  //   let account = await web3.eth.getAccounts();
+  //   let amount = 1000000000;
+  //   await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+  // }
     
   
     return (    
@@ -132,9 +171,13 @@ function Vault() {
       <br /> 
      
   <Popup trigger={<button class="btn btn-primary " > Deposit</button>} position="bottom center"><br />
-    <div class="text-white bg-dark">Enter the amount you want to Deposit</div>
+ 
+             <div class="text-white bg-dark">Enter the amount you want to Deposit</div>
     <input type = "number" name="tid" required onChange={event => setId( event.target.value)} />
     <button class="btn btn-primary" onClick = {deposit} >Confirm</button>
+          
+ 
+   
     </Popup>
 
     &nbsp;
@@ -151,16 +194,23 @@ function Vault() {
     </Popup>
     &nbsp;
       <Popup trigger={<button class="btn btn-primary">  Repay Borrow</button>} position="bottom center"><br />
-
-{/* <label >Select a token to repay:</label>
-<select id = "cars" >
-  <option value="volvo">Token1</option>
-  <option value="saab">Token2</option>
-  
-</select> */}
-    <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
-    <input type = "number"  name="tid3" required onChange={event => setId3( event.target.value)} />
+    
+   
+            <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
+<input type = "number"  name="tid5" required onChange={event => setId5( event.target.value)} />
     <button class="btn btn-primary" onClick={repayborrow} >Confirm</button>
+        
+    
+    </Popup>
+    &nbsp;
+      <Popup trigger={<button class="btn btn-primary">  Repay Borrow bY BASE token</button>} position="bottom center"><br />
+    
+   
+            <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
+<input type = "number"  name="tid3" required onChange={event => setId3( event.target.value)} />
+    <button class="btn btn-primary" onClick={repayborro} >Confirm</button>
+        
+    
     </Popup>
     &nbsp;
       <Popup trigger={<button class="btn btn-primary">  Liquidate</button>} position="bottom center"><br />
@@ -171,17 +221,28 @@ function Vault() {
     <br></br>
   <br></br> <br></br>
   <br></br>
+  
 
+  <h3>Deposits</h3>
+  <br></br><br></br>
+  <text>Your wallet Balance :  &nbsp;{parseFloat(balance/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text><br></br>  
+  <br></br>
+  <text>Total deposited Balance  :   &nbsp;{ parseFloat(totaldep/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text> <br></br>
+  <br></br>
+ <text>Availbe to withdraw:  &nbsp;{parseFloat(avalwithdraw/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text> <br></br>
+  <br></br>
+<br></br>
 
-  <text>Total deposited    :   &nbsp;{ parseFloat(totaldep/100000000000000000).toFixed(18)}</text> <br></br>
+<h3>Borrow</h3>
+<br></br><br></br>
+
+  <text>Remaining Token to debt   :  &nbsp;{parseFloat(totaldebt/1000000000000000000).toFixed(5)} &nbsp;<b>SYNTHETIC</b></text> <br></br>
   <br></br>
-  <text>Total debt         :  &nbsp;{parseFloat(totaldebt/100000000000000000).toFixed(18)}</text> <br></br>
+  <text>Available to borrow:  &nbsp;{parseFloat(avaltoborrow/1000000000000000000).toFixed(5)} &nbsp;<b>SYNTHETIC</b></text><br></br> 
   <br></br>
-  <text>Availbe to withdraw:  &nbsp;{parseFloat(avalwithdraw/1000000000000000000).toFixed(18)}</text> <br></br>
-  <br></br>
-  <text>Available to borrow:  &nbsp;{parseFloat(avalwithdraw/1000000000000000000).toFixed(18)}</text><br></br> 
-  <br></br>
-  <text>Balance of Token   :  &nbsp;{parseFloat(balance/1000000000000000000).toFixed(18)}</text><br></br>  
+<text>Your wallet Balance:  &nbsp;{parseFloat(balan/1000000000000000000).toFixed(5)} &nbsp;<b>SYNTHETIC</b></text><br></br> 
+
+  
   
   
   
