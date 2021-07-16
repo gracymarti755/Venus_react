@@ -35,6 +35,10 @@ var[ap1,setAP] = useState("");
    const bal = async () => {
  
       const accounts =  await web3.eth.getAccounts();
+      if(accounts!=0){
+        document.getElementById("cc").style.visibility="hidden";
+         document.getElementById("cc1").innerHTML=accounts;
+   
       var totaldeposit = await Alchemist.methods.getCdpTotalDeposited(accounts[0]).call();
       setTotaldeposit(totaldeposit);
       var totaldebited = await Alchemist.methods.getCdpTotalDebt(accounts[0]).call();
@@ -60,10 +64,22 @@ var[ap1,setAP] = useState("");
       else{
         setAP(false);
       }
+    }
+    else{
+      document.getElementById("cc").style.visibility="true";
+
+   }
       
    }
   //  alert(tid3[1]);
    useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw,app1,ap1])
+   const connect = async() => {
+    window.ethereum.enable();
+    let account = await web3.eth.getAccounts();
+   
+ //document.getElementById("cc").style.visibility="hidden";
+ document.getElementById("cc").style.visibility="hidden";
+ }
   const deposit = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
@@ -142,25 +158,10 @@ var[ap1,setAP] = useState("");
     return (    
   
       <div className="App">
-  
-  
-  <h1>Vault</h1>
-  
-  
-  
-  <button
-                  class="btn btn-info btn-block"
-                  type="button"
-                  onClick={() => {
-                    history.push("/");
-                  }}>
-                  Go Home Page 
-                </button>
-  
-  
-                <br></br>
-  <br></br>
-  
+        <button id="cc" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} onClick={connect}>connect wallet</button>
+        <button id="cc1" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} ></button>
+        
+        <h1>Vault</h1>
   
         
   <center>
