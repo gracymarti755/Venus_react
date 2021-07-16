@@ -2,9 +2,9 @@ import React  from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import {Card,Button,Container} from 'react-bootstrap';
-import Supply from "./Supply";
+
 import './App.css';
-import Borrow from "./borrow";
+import Vault from "./Vault";
 
 
 function App() {
@@ -27,26 +27,19 @@ function App() {
           <Switch>
             <Route path="/" exact>
               <br/>
-              <div class="display-4  mb-1"><h1 class="homehead">CREDIT</h1></div>
+              <div class="display-4  mb-1"><h1 class="homehead">ALCHEMIX</h1></div>
               <br></br><br></br><br></br>
               
-              <Button variant="primary"
-                className="btn"
-                onClick={() => {
-                  history.push("/Supply");
-                }}
-              >
-                Supply Concept    
-              </Button>{' '}
+              
               <br></br>
               <br />
               <Button variant="primary"
                 className="btn"
                 onClick={() => {
-                  history.push("/Borrow");
+                  history.push("/Vault");
                 }}
               >
-                Borrow Concept    
+               Vault page    
               </Button>{' '}
 
 
@@ -56,11 +49,9 @@ function App() {
 
             </Route>
             
-            <Route path="/Supply">
-              <Supply />
-            </Route>
-            <Route path="/Borrow">
-              <Borrow />
+            
+            <Route path="/Vault">
+              <Vault />
             </Route>
           </Switch>
         </Router>
