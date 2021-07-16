@@ -75,7 +75,7 @@ var[ap1,setAP] = useState("");
    useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw,app1,ap1])
    const connect = async() => {
     window.ethereum.enable();
-    let account = await web3.eth.getAccounts();
+    
    
  //document.getElementById("cc").style.visibility="hidden";
  document.getElementById("cc").style.visibility="hidden";
@@ -160,7 +160,7 @@ var[ap1,setAP] = useState("");
       <div className="App">
         <button id="cc" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} onClick={connect}>connect wallet</button>
         <button id="cc1" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} ></button>
-        
+
         <h1>Vault</h1>
   
         
