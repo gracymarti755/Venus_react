@@ -45,24 +45,25 @@ var[ap1,setAP] = useState("");
       setAvalborrow(bb);
       setbalance(await basetoken.methods.balanceOf(accounts[0]).call());
       setbalan(await synth.methods.balanceOf(accounts[0]).call());
-      // let a = await basetoken.methods.allowance(accounts[0],0xe131C705e5e1405e0FF627b5782bcC3664Cd8506).call();
-      // alert(a);
-      // if(a>0){
-      //   setApp(true);
-      // }
-      // else{
-      //   setApp(false);
-      // }
-      // let b=await synth.methods.allowance(accounts[0],0xe131C705e5e1405e0FF627b5782bcC3664Cd8506).call();
-      // if(a>0){
-      //   setAP(true);
-      // }
-      // else{
-      //   setAP(false);
-      // }
+      let a = await basetoken.methods.allowance(accounts[0],"0xe131C705e5e1405e0FF627b5782bcC3664Cd8506").call();
+       if(a>0){
+        setApp(true);
+      }
+      else{
+        setApp(false);
+      }
+      
+      let b= await synth.methods.allowance(accounts[0],"0xe131C705e5e1405e0FF627b5782bcC3664Cd8506").call();
+      if(a>0){
+        setAP(true);
+      }
+      else{
+        setAP(false);
+      }
+      
    }
   //  alert(tid3[1]);
-   useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw])
+   useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw,app1,ap1])
   const deposit = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
@@ -122,16 +123,20 @@ var[ap1,setAP] = useState("");
     alert("liquidate succesfully")
     bal()
   }
-  // const approve = async() => {
-  //   let account = await web3.eth.getAccounts();
-  //   let amount = 1000000000; 
-  //   await basetoken.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
-  // }
-  // const approv = async() => {
-  //   let account = await web3.eth.getAccounts();
-  //   let amount = 1000000000;
-  //   await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
-  // }
+  const approve = async() => {
+    let account = await web3.eth.getAccounts();
+    let amount = 1000000000000000000 +"0000000000"; 
+    await basetoken.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+    bal()
+    alert("Approved Succesfully")
+  }
+  const approv = async() => {
+    let account = await web3.eth.getAccounts();
+    let amount = 1000000000;
+    await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+    bal()
+    alert("Approved Succesfully")
+  }
     
   
     return (    
@@ -171,11 +176,32 @@ var[ap1,setAP] = useState("");
       <br /> 
      
   <Popup trigger={<button class="btn btn-primary " > Deposit</button>} position="bottom center"><br />
- 
-             <div class="text-white bg-dark">Enter the amount you want to Deposit</div>
+
+  <div>         
+
+{ app1 === false ? 
+(
+(
+<div>
+<h1>Before Deposit we want to approve first</h1>
+<br />
+<button class="btn btn-primary" onClick={approve}>Approve</button>
+</div>
+)
+):
+(
+(
+<div>
+<div class="text-white bg-dark">Enter the amount you want to Deposit</div>
     <input type = "number" name="tid" required onChange={event => setId( event.target.value)} />
     <button class="btn btn-primary" onClick = {deposit} >Confirm</button>
           
+</div>
+)
+)}
+    </div> 
+ 
+   
  
    
     </Popup>
@@ -195,12 +221,32 @@ var[ap1,setAP] = useState("");
     &nbsp;
       <Popup trigger={<button class="btn btn-primary">  Repay Borrow</button>} position="bottom center"><br />
     
-   
-            <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
+      <div>         
+
+{ ap1 === false ? 
+(
+(
+<div>
+<h1>Before Repay we want to approve first</h1>
+<br />
+<button class="btn btn-primary" onClick={approv}>Approve</button>
+</div>
+)
+):
+(
+(
+<div>
+<div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
 <input type = "number"  name="tid5" required onChange={event => setId5( event.target.value)} />
     <button class="btn btn-primary" onClick={repayborrow} >Confirm</button>
         
-    
+         
+</div>
+)
+)}
+    </div> 
+ 
+            
     </Popup>
     &nbsp;
       <Popup trigger={<button class="btn btn-primary">  Repay Borrow bY BASE token</button>} position="bottom center"><br />
