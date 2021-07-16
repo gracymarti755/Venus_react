@@ -58,7 +58,7 @@ var[ap1,setAP] = useState("");
       }
       
       let b= await synth.methods.allowance(accounts[0],"0xe131C705e5e1405e0FF627b5782bcC3664Cd8506").call();
-      if(a>0){
+      if(b>0){
         setAP(true);
       }
       else{
