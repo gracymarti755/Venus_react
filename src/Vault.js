@@ -72,7 +72,7 @@ var[ap1,setAP] = useState("");
       
    }
   //  alert(tid3[1]);
-   useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw,app1,ap1])
+   useEffect(()=>{bal()},[totaldep,totaldebt,avalwithdraw,avaltoborrow,balance,balan,app1,ap1])
    const connect = async() => {
     window.ethereum.enable();
     
@@ -148,7 +148,7 @@ var[ap1,setAP] = useState("");
   }
   const approv = async() => {
     let account = await web3.eth.getAccounts();
-    let amount = 1000000000;
+    let amount =  1000000000000000000 +"0000000000"; 
     await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
     bal()
     alert("Approved Succesfully")
@@ -238,7 +238,7 @@ var[ap1,setAP] = useState("");
 (
 <div>
 <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
-<input type = "number"  name="tid5" required onChange={event => setId5( event.target.value)} />
+<input type = "number"  name="tid5" required onChange={event => setId3( event.target.value)} />
     <button class="btn btn-primary" onClick={repayborrow} >Confirm</button>
         
          
@@ -254,7 +254,7 @@ var[ap1,setAP] = useState("");
     
    
             <div class="text-white bg-dark">Enter the amount you want to Repay Borrow</div>
-<input type = "number"  name="tid3" required onChange={event => setId3( event.target.value)} />
+<input type = "number"  name="tid3" required onChange={event => setId5( event.target.value)} />
     <button class="btn btn-primary" onClick={repayborro} >Confirm</button>
         
     
