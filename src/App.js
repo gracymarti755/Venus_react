@@ -5,6 +5,7 @@ import {Card,Button,Container} from 'react-bootstrap';
 
 import './App.css';
 import Vault from "./Vault";
+import Transmuter from "./transmuter";
 
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
               >
                Vault page    
               </Button>{' '}
+              <Button variant="primary"
+                className="btn"
+                onClick={() => {
+                  history.push("/Transmuter");
+                }}
+              >
+               Transmuter page    
+              </Button>{' '}
 
 
 
@@ -52,6 +61,9 @@ function App() {
             
             <Route path="/Vault">
               <Vault />
+            </Route>
+            <Route path="/Transmuter">
+              <Transmuter />
             </Route>
           </Switch>
         </Router>
