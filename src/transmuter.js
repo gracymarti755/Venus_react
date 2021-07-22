@@ -102,7 +102,7 @@ const deposit = async(event) => {
                <br></br>
                <text>Your Deposited Balance:  &nbsp;{parseFloat(values[0]/1000000000000000000).toFixed(5)} &nbsp;<b>SYNTHETIC</b></text><br></br> 
                <br></br>
-               <text>Your Transmutable BASE Token:  &nbsp;{parseFloat(values[1]/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text><br></br> 
+               <text>Your Transmutable BASE Token:  &nbsp;{parseFloat(values[2]/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text><br></br> 
                <br></br>
                <text>Your BASE Token:  &nbsp;{parseFloat(values[3]/1000000000000000000).toFixed(5)} &nbsp;<b>BASE</b></text><br></br> 
                <br></br>
