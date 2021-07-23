@@ -2,8 +2,7 @@ import React, { useState,useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import App from "./App";
-import Alchemist from "./Alchemistabi";
-import basetoken from "./borrow";
+
 import synth from "./syntheticabi";
 import Popup from 'reactjs-popup';
 import transmuterabi from "./transmuterabi";
@@ -80,15 +79,27 @@ const deposit = async(event) => {
   const transmute = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
-    await transmuterabi.methods.transmute().send({from:accounts[0]});
-    alert("Transmute succesfully")
+    if(values[2] > 0){
+      await transmuterabi.methods.transmute().send({from:accounts[0]});
+      alert("Transmute succesfully")
+    }
+    else{
+      alert("You dont have Transmutable BASE token")
+    }
     first()
   }
   const transmuteClaimAndWithdraw = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
-    await transmuterabi.methods.transmuteClaimAndWithdraw().send({from:accounts[0]});
-    alert("Claim and withdraw succesfully")
+    if(values[3] > 0){
+      await transmuterabi.methods.transmuteClaimAndWithdraw().send({from:accounts[0]});
+      alert("Claim and withdraw succesfully")
+    }
+
+    else{
+      alert("You dont have enough Base Token")
+    }
+    
     first()
   }
     return (

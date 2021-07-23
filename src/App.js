@@ -6,6 +6,7 @@ import {Card,Button,Container} from 'react-bootstrap';
 import './App.css';
 import Vault from "./Vault";
 import Transmuter from "./transmuter";
+import Staking from "./staking";
 
 
 function App() {
@@ -51,6 +52,15 @@ function App() {
                Transmuter page    
               </Button>{' '}
 
+              <Button variant="primary"
+                className="btn"
+                onClick={() => {
+                  history.push("/Staking");
+                }}
+              >
+               Staking page    
+              </Button>{' '}
+
 
 
 
@@ -64,6 +74,9 @@ function App() {
             </Route>
             <Route path="/Transmuter">
               <Transmuter />
+            </Route>
+            <Route path="/Staking">
+              <Staking />
             </Route>
           </Switch>
         </Router>
