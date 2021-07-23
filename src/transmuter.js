@@ -53,7 +53,7 @@ const connect = async() => {
 
 const approve = async() => {
     let account = await web3.eth.getAccounts();
-    let amount = 1000000000000000000 +"0000000000"; 
+    let amount = 1000000000000000000 +"000000000000000000"; 
     await synth.methods.approve("0xd8dE999aeb4C8587D9356d13c342615663Ab8861",amount).send({from:account[0]});
     first()
     alert("Approved Succesfully")

@@ -25,9 +25,10 @@ function Staking(){
         const accounts =  await web3.eth.getAccounts();
 
         setAl(await synth.methods.balanceOf(accounts[0]).call());
-        setDep(await stakingabi.methods.getstakingTotalDeposited(accounts[0],0).call());
+        var l = await stakingabi.methods.getStakeTotalDeposited(accounts[0],0).call();
+        setDep(l);
         
-        setUnclaim(await stakingabi.methods.getstakingTotalUnclaimed(accounts[0],0).call());
+        setUnclaim(await stakingabi.methods.getStakeTotalUnclaimed(accounts[0],0).call());
         
         setBalan(await alch.methods.balanceOf(accounts[0]).call());
         let b= await synth.methods.allowance(accounts[0],"0xd8dE999aeb4C8587D9356d13c342615663Ab8861").call();
@@ -43,8 +44,14 @@ function Staking(){
     useEffect(()=>{first()},[altoken,dep,unclaim,balan])
     var x = setInterval(function(){
         first()
-   },1000);
-
+    },1000);
+    const approve = async() => {
+        let account = await web3.eth.getAccounts();
+        let amount = 1000000000000000000 +"000000000000000000"; 
+        await synth.methods.approve("0xaf602e3403292B82dB4883e38050A14c07F481D9",amount).send({from:account[0]});
+        first()
+        alert("Approved Succesfully")
+    }
    const stake = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
@@ -92,9 +99,31 @@ function Staking(){
         <br></br>
         <text>Balance : {parseFloat(balan/1000000000000000000).toFixed(5)} REWARD</text><br></br>
         <br></br>
-             <div class="text-white ">Enter the amount you want to stake</div>
+
+<div>         
+
+{ ap1 === false ? 
+(
+(
+<div>
+<h4 style={{marginLeft:"400px"}}>Before Deposit we want to approve first</h4>
+<br />
+<button class="btn btn-primary" style={{marginLeft:"400px"}} onClick={approve}>Approve</button>
+</div>
+)
+):
+(
+(
+<div>
+
+<div class="text-white ">Enter the amount you want to stake</div>
     <input type = "number"  name="tid" required onChange={event => setId( event.target.value)} />
-    <button class="btn btn-primary" onClick={stake} >stake</button>
+    <button class="btn btn-primary" onClick={stake} >stake</button>    
+</div>
+)
+)}
+  </div> 
+             
         <br></br>
         <br></br>
              <div class="text-white">Enter the amount you want to unstake</div>

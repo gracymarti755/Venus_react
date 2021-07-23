@@ -148,7 +148,7 @@ var[ap1,setAP] = useState("");
   }
   const approv = async() => {
     let account = await web3.eth.getAccounts();
-    let amount =  1000000000000000000 +"0000000000"; 
+    let amount =  1000000000000000000 +"000000000000000000"; 
     await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
     bal()
     alert("Approved Succesfully")
