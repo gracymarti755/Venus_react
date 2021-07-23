@@ -23,7 +23,9 @@ function Staking(){
     const first = async () => {
 
         const accounts =  await web3.eth.getAccounts();
-
+        if(accounts!=0){
+            document.getElementById("cc").style.visibility="hidden";
+             document.getElementById("cc1").innerHTML=accounts;
         setAl(await synth.methods.balanceOf(accounts[0]).call());
         var l = await stakingabi.methods.getStakeTotalDeposited(accounts[0],0).call();
         setDep(l);
@@ -38,6 +40,11 @@ function Staking(){
         else{
             setAP(false);
         }
+    }
+    else{
+      document.getElementById("cc").style.visibility="true";
+    
+    }
         
 
     }
@@ -45,6 +52,13 @@ function Staking(){
     var x = setInterval(function(){
         first()
     },1000);
+    const connect = async() => {
+        window.ethereum.enable();
+        
+       
+     //document.getElementById("cc").style.visibility="hidden";
+     document.getElementById("cc").style.visibility="hidden";
+     }
     const approve = async() => {
         let account = await web3.eth.getAccounts();
         let amount = 1000000000000000000 +"000000000000000000"; 
@@ -94,6 +108,8 @@ function Staking(){
 
     return (
         <div> 
+            <button id="cc" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} onClick={connect}>connect wallet</button>
+        <button id="cc1" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} ></button>
         <h4>Staking</h4>
         <br></br><br></br>
         <text>Your Balance : {parseFloat(altoken/1000000000000000000).toFixed(5)} SYNTHETIC </text><br></br>
@@ -138,7 +154,7 @@ function Staking(){
 )}
   </div> 
              
-        
+         
 </div>  
     )
 }
