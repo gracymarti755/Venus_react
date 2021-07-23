@@ -49,8 +49,9 @@ function Staking(){
         let account = await web3.eth.getAccounts();
         let amount = 1000000000000000000 +"000000000000000000"; 
         await synth.methods.approve("0xaf602e3403292B82dB4883e38050A14c07F481D9",amount).send({from:account[0]});
-        first()
         alert("Approved Succesfully")
+        first()
+        
     }
    const stake = async(event) => {
     event.preventDefault();
@@ -73,9 +74,13 @@ function Staking(){
    const claim = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
-   
-    await stakingabi.methods.claim(0).send({from:accounts[0]});
-    alert("Rewards Claimed")
+    if(unclaim > 0){
+        await stakingabi.methods.claim(0).send({from:accounts[0]});
+        alert("Rewards Claimed")
+    }
+    else{
+        alert("Not Sufficient Reward to claim")
+    }
     first()
    }
    const exit = async(event) => {
@@ -106,9 +111,9 @@ function Staking(){
 (
 (
 <div>
-<h4 style={{marginLeft:"400px"}}>Before Deposit we want to approve first</h4>
+<h4 >Before Deposit we want to approve first</h4>
 <br />
-<button class="btn btn-primary" style={{marginLeft:"400px"}} onClick={approve}>Approve</button>
+<button class="btn btn-primary"  onClick={approve}>Approve</button>
 </div>
 )
 ):
@@ -118,13 +123,8 @@ function Staking(){
 
 <div class="text-white ">Enter the amount you want to stake</div>
     <input type = "number"  name="tid" required onChange={event => setId( event.target.value)} />
-    <button class="btn btn-primary" onClick={stake} >stake</button>    
-</div>
-)
-)}
-  </div> 
-             
-        <br></br>
+    <button class="btn btn-primary" onClick={stake} >stake</button> 
+    <br></br>
         <br></br>
              <div class="text-white">Enter the amount you want to unstake</div>
     <input type = "number"  name="tid1"  required onChange={event => setId1( event.target.value)} />
@@ -132,7 +132,13 @@ function Staking(){
         <br></br> <br></br><br></br>
         <button class="btn btn-primary" onClick={claim} >Claim</button>
         &nbsp;
-        <button class="btn btn-primary" onClick={exit} >Exit</button>
+        <button class="btn btn-primary" onClick={exit} >Exit</button>   
+</div>
+)
+)}
+  </div> 
+             
+        
 </div>  
     )
 }
