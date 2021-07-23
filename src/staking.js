@@ -65,7 +65,7 @@ function Staking(){
    const unstake = async(event) => {
     event.preventDefault();
     const accounts =  await web3.eth.getAccounts();
-    var val = tid * 1000000000;
+    var val = tid1 * 1000000000;
     var value = val + "000000000"
     await stakingabi.methods.withdraw(0,value).send({from:accounts[0]});
     alert("unstake succesfully Done")
@@ -103,7 +103,7 @@ function Staking(){
         <text>Your Rewards : {parseFloat(unclaim/1000000000000000000).toFixed(18)} REWARD</text><br></br>
         <br></br>
         <text>Balance : {parseFloat(balan/1000000000000000000).toFixed(5)} REWARD</text><br></br>
-        <br></br>
+        <br></br><br></br><br></br>
 
 <div>         
 
@@ -121,12 +121,12 @@ function Staking(){
 (
 <div>
 
-<div class="text-white ">Enter the amount you want to stake</div>
-    <input type = "number"  name="tid" required onChange={event => setId( event.target.value)} />
+<div class="text-white "><b>Enter the amount you want to stake</b></div>
+    <input type = "number"  name="tid" size="5%" required onChange={event => setId( event.target.value)} />
     <button class="btn btn-primary" onClick={stake} >stake</button> 
     <br></br>
         <br></br>
-             <div class="text-white">Enter the amount you want to unstake</div>
+             <div class="text-white"><b>Enter the amount you want to unstake</b></div>
     <input type = "number"  name="tid1"  required onChange={event => setId1( event.target.value)} />
     <button class="btn btn-primary" onClick={unstake} >Unstake</button>
         <br></br> <br></br><br></br>
