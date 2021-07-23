@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import App from "./App";
-
+import './App.css';
 import synth from "./syntheticabi";
 import Popup from 'reactjs-popup';
 import transmuterabi from "./transmuterabi";

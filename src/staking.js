@@ -7,7 +7,7 @@ import synth from "./syntheticabi";
 import Popup from 'reactjs-popup';
 import stakingabi from "./stakingabi";
 import alch from "./alchabi";
-
+import './App.css';
 import web3 from './web3';
 
 function Staking(){
@@ -107,7 +107,7 @@ function Staking(){
    }
 
     return (
-        <div> 
+        <div  className="App"> 
             <button id="cc" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} onClick={connect}>connect wallet</button>
         <button id="cc1" class="btn btn-info btn-bloc" style={{marginLeft:"800px"}} ></button>
         <h4>Staking</h4>
