@@ -44,13 +44,14 @@ var[ap1,setAP] = useState("");
       setTotaldeposit(totaldeposit);
       var totaldebited = await Alchemist.methods.getCdpTotalDebt(accounts[0]).call();
       setTotaldebt(totaldebited);
-      setAvalwithdraw(totaldep - totaldebt);
+      var collaterallimit=await Alchemist.methods.collateralizationLimit().call();
+      setAvalwithdraw(totaldep - (totaldebt * collaterallimit)/1000000000000000000);
       var av = (totaldep * 50)/100;
       var bb = av - totaldebt;
       setAvalborrow(bb);
       setbalance(await basetoken.methods.balanceOf(accounts[0]).call());
       setbalan(await synth.methods.balanceOf(accounts[0]).call());
-      let a = await basetoken.methods.allowance(accounts[0],"0xe131C705e5e1405e0FF627b5782bcC3664Cd8506").call();
+      let a = await basetoken.methods.allowance(accounts[0],"0x81ccB9a3a1df0A01eEd52bBAA4b6363C38BbEEfC").call();
        if(a>0){
         setApp(true);
       }
@@ -58,7 +59,7 @@ var[ap1,setAP] = useState("");
         setApp(false);
       }
       
-      let b= await synth.methods.allowance(accounts[0],"0xe131C705e5e1405e0FF627b5782bcC3664Cd8506").call();
+      let b= await synth.methods.allowance(accounts[0],"0x81ccB9a3a1df0A01eEd52bBAA4b6363C38BbEEfC").call();
       if(b>0){
         setAP(true);
       }
@@ -143,14 +144,14 @@ var[ap1,setAP] = useState("");
   const approve = async() => {
     let account = await web3.eth.getAccounts();
     let amount = 1000000000000000000 +"0000000000"; 
-    await basetoken.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+    await basetoken.methods.approve("0x81ccB9a3a1df0A01eEd52bBAA4b6363C38BbEEfC",amount).send({from:account[0]});
     bal()
     alert("Approved Succesfully")
   }
   const approv = async() => {
     let account = await web3.eth.getAccounts();
     let amount =  1000000000000000000 +"000000000000000000"; 
-    await synth.methods.approve("0xe131C705e5e1405e0FF627b5782bcC3664Cd8506",amount).send({from:account[0]});
+    await synth.methods.approve("0x81ccB9a3a1df0A01eEd52bBAA4b6363C38BbEEfC",amount).send({from:account[0]});
     bal()
     alert("Approved Succesfully")
   }
