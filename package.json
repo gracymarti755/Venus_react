@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "15.6.0",
+    "node":">=0.12",
     "npm": "7.6.0"
   },
+ 
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -19,10 +20,6 @@
     "reactjs-popup": "^2.0.4",
     "web-vitals": "^1.1.1",
     "web3": "^1.0.0-beta.26"
-  },
-  "engines": {
-    "node": "15.6.0",
-    "npm": "7.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

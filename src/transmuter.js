@@ -25,15 +25,19 @@ const first = async () => {
         document.getElementById("cc").style.visibility="hidden";
          document.getElementById("cc1").innerHTML=accounts;
     setbalan(await synth.methods.balanceOf(accounts[0]).call());
-    setValues(await transmuterabi.methods.userInfo(accounts[0]).call());
+    console.log("balance",balan);
     
-    let b= await synth.methods.allowance(accounts[0],"0xd8dE999aeb4C8587D9356d13c342615663Ab8861").call();
+    console.log("balance",balan);
+
+    let b= await synth.methods.allowance(accounts[0],"0x380EF5B39F3F68EF7c80f21384F92EEB0a4c06Cd").call();
+ 
     if(b>0){
       setAP(true);
     }
     else{
       setAP(false);
     }
+    setValues(await transmuterabi.methods.userInfo(accounts[0]).call());
 }
 else{
   document.getElementById("cc").style.visibility="true";
@@ -54,7 +58,7 @@ const connect = async() => {
 const approve = async() => {
     let account = await web3.eth.getAccounts();
     let amount = 1000000000000000000 +"000000000000000000"; 
-    await synth.methods.approve("0xd8dE999aeb4C8587D9356d13c342615663Ab8861",amount).send({from:account[0]});
+    await synth.methods.approve("0x380EF5B39F3F68EF7c80f21384F92EEB0a4c06Cd",amount).send({from:account[0]});
     first()
     alert("Approved Succesfully")
 }
@@ -85,6 +89,19 @@ const deposit = async(event) => {
     }
     else{
       alert("You dont have Transmutable BASE token")
+    }
+    first()
+  }
+
+  const claim = async(event) => {
+    event.preventDefault();
+    const accounts =  await web3.eth.getAccounts();
+    if(values[3] > 0){
+      await transmuterabi.methods.claim().send({from:accounts[0]});
+      alert("claim succesfully")
+    }
+    else{
+      alert("You dont have Transmutable BASE token to claim")
     }
     first()
   }
@@ -156,6 +173,9 @@ const deposit = async(event) => {
     </Popup>
     &nbsp;
     <button class="btn btn-primary" onClick={transmute} >Transmute</button>
+    &nbsp;
+    &nbsp;
+    <button class="btn btn-primary" onClick={claim} >Claim</button>
     &nbsp;
     <button class="btn btn-primary" onClick={transmuteClaimAndWithdraw} >Transmute & Exit</button>
         </div>
